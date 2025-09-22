@@ -1,0 +1,43 @@
+/* aquí si quiero evitar usar clases, nadie me dirá nada. no es una estúpida entrevista */
+body {
+    background-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' version='1.1' height='20' width='1920'><text x='0' y='15' fill='black' font-size='15' font-family='Fira Code, sans-serif' font-weight='lighter'>> Un simposio es un compendio de especialistas en el que se expone y desarrolla un tema de forma completa y detallada.    Como cada uno de nosotros era varios, en total ya éramos muchos.</text></svg>");
+    /* animation: backgroundAnimation 5s infinite linear; */
+}
+
+main {
+    text-shadow: 2px 0px #fff, 0 -2px #fff, -2px 1px #fff, 2px 2px #fff;
+}
+
+@keyframes backgroundAnimation {
+    0% {
+        background-position: 0 0;
+    }
+
+    100% {
+        background-position: -100% 100%;
+    }
+}
+
+@media screen and (min-width: 600px) {
+    main {
+        display: flex;
+    }
+
+    main>aside {
+        width: 80vw;
+    }
+
+    main>section {
+        width: 20vw;
+    }
+
+    @keyframes backgroundAnimation {
+        0% {
+            background-position: 0 0;
+        }
+
+        100% {
+            background-position: 0 100%;
+        }
+    }
+}

@@ -1,0 +1,9 @@
+main ul li {
+    display: block;
+    width: 100vw;
+    text-align: center;
+}
+main ul li img {
+    max-width: 100vw;
+    max-height: 100vh;
+}

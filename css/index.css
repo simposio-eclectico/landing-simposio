@@ -1,0 +1,72 @@
+
+/* Estilo base para mobile */
+header,
+main,
+nav {
+  width: 100%;
+}
+
+ul {
+  border-top: 1px solid #000;
+}
+
+li {
+  padding: 10px;
+  list-style-type: "\2592";
+  text-align: right;
+}
+
+li:not(:last-child) {
+  border-bottom: 1px solid #000;
+}
+
+li:hover {
+  padding: 10px 15px;
+  margin: 0 20px;
+}
+
+li a {
+  color: #000;
+}
+
+section {
+  display: none;
+}
+
+strong a {
+  color: #000;
+  text-decoration: none;
+  margin: 10px;
+  line-height: 1.4;
+}
+
+@media screen and (min-width: 600px) {
+  header {
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+    height: 100vh;
+  }
+
+  section {
+    display: block;
+    position: absolute;
+    top: 0;
+    left: 0;
+  }
+  
+  nav {
+    position: fixed;
+    bottom: 0;
+    right: 0;
+    text-align: right;
+  }
+
+  main ul {
+    display: inline-flex;
+  }
+
+  ul li {
+    margin: 0 25px;
+    border: none!important;
+  }
+}
