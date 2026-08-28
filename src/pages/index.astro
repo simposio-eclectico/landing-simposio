@@ -63,30 +63,22 @@ import PageHeaderTop from '../components/PageHeaderTop.astro';
 
   @media screen and (min-width: 600px) {
     nav {
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      justify-content: center;
-      min-height: 300px;
-    }
-
-    strong {
-      margin-bottom: 20px;
-      font-size: 1.2rem;
+      position: fixed;
+      bottom: 0;
+      right: 0;
+      text-align: right;
     }
 
     ul {
-      display: flex;
-      flex-direction: row;
-      gap: 40px;
+      display: inline-flex;
       border: none;
-      justify-content: center;
     }
 
     li {
+      margin: 0 25px;
       padding: 0;
       list-style: none;
-      text-align: center;
+      text-align: right;
       border: none;
     }
 
@@ -96,12 +88,12 @@ import PageHeaderTop from '../components/PageHeaderTop.astro';
 
     li:hover {
       padding: 0;
-      margin: 0;
+      margin: 0 25px;
       text-decoration: underline;
     }
 
-    li a {
-      color: #000;
+    strong a {
+      margin: 0;
     }
   }
 </style>
