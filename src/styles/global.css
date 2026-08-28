@@ -17,42 +17,10 @@ a {
 
 /* Base styles for mobile */
 header,
-main,
-nav {
+main {
   width: 100%;
 }
 
 section {
   display: none;
-}
-
-@media screen and (min-width: 600px) {
-  header {
-    display: grid;
-    grid-template-columns: 1fr 1fr 1fr;
-    height: 100vh;
-  }
-
-  section {
-    display: block;
-    position: absolute;
-    top: 0;
-    left: 0;
-  }
-
-  nav {
-    position: fixed;
-    bottom: 0;
-    right: 0;
-    text-align: right;
-  }
-
-  main ul {
-    display: inline-flex;
-  }
-
-  ul li {
-    margin: 0 25px;
-    border: none!important;
-  }
 }
