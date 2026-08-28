@@ -81,3 +81,27 @@ This is a static site for **Simposio Ecléctico**, an open-source artist collect
 - Production builds output to `dist/` directory (git-ignored)
 - Static HTML files generated for each page at build time
 - Assets (images, CSS) optimized and hashed for caching
+
+## Deployment (GitHub Pages)
+
+The site is configured to deploy automatically to GitHub Pages at `https://simposio-eclectico.github.io/`.
+
+**Automatic Deployment**:
+- A GitHub Actions workflow (`.github/workflows/deploy.yml`) automatically runs on every push to `main`
+- The workflow:
+  1. Installs dependencies with pnpm
+  2. Builds the site with `pnpm run build`
+  3. Deploys the `dist/` directory to GitHub Pages
+
+**Manual Deployment**:
+If you need to deploy manually, run:
+```bash
+pnpm run build
+```
+Then push the changes to the `main` branch. GitHub Actions will handle the deployment.
+
+**Repository Settings**:
+Ensure in GitHub repository settings (Settings → Pages):
+- **Source**: Deploy from a branch
+- **Branch**: gh-pages
+- The workflow automatically creates and updates the `gh-pages` branch
