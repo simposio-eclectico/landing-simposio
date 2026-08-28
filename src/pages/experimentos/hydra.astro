@@ -1,0 +1,33 @@
+---
+import Layout from '../../layouts/Layout.astro';
+import PageHeaderTop from '../../components/PageHeaderTop.astro';
+import PageFooter from '../../components/PageFooter.astro';
+---
+
+<Layout title="simposio+eclectico+experimentos+hydra">
+  <PageHeaderTop />
+  <main class="experimentos-main">
+    <iframe
+      src="https://hydra.ojack.xyz/?sketch_id=931d2QWYnTPMTl38"
+      class="hydra-iframe"
+      title="Hydra Synthesis"
+      allow="autoplay"
+    ></iframe>
+  </main>
+  <PageFooter />
+</Layout>
+
+<style>
+  .experimentos-main {
+    margin: 0;
+    padding: 0;
+    overflow: hidden;
+  }
+
+  .hydra-iframe {
+    width: 100%;
+    height: 100%;
+    border: none;
+    display: block;
+  }
+</style>
