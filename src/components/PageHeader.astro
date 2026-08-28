@@ -1,27 +1,9 @@
 ---
-interface Props {
-  isHome?: boolean;
-}
-
-const { isHome = false } = Astro.props;
+import Navigation from './Navigation.astro';
 ---
 
 <header>
-  <nav>
-    <strong>
-      {isHome ? (
-        <a href="https://github.com/simposio-eclectico" target="_blank">open-source artist</a>
-      ) : (
-        <a href="/">GO HOME S1MP</a>
-      )}
-    </strong><br />
-    <ul>
-      <li><a href="/meme/">meme</a></li>
-      <li><a href="/audio/">audio</a></li>
-      <li><a href="/experimentos/">experimentos</a></li>
-      <li><a href="/acerca/">acerca</a></li>
-    </ul>
-  </nav>
+  <Navigation />
 </header>
 
 <style>
@@ -35,29 +17,42 @@ const { isHome = false } = Astro.props;
     height: 50px;
   }
 
-  nav {
-    width: 100%;
+  header :global(nav) {
+    display: flex;
+    align-items: center;
+    height: 100%;
   }
 
-  nav ul {
+  header :global(ul) {
     display: flex;
     flex-direction: row;
     justify-content: space-evenly;
+    border: none;
+    margin: 0;
   }
 
-  nav ul li {
+  header :global(li) {
     list-style-type: none;
-    margin: 5px 10px;
+    padding: 5px 10px;
+    border: none;
+    text-align: center;
+    margin: 0;
   }
 
-  nav ul li a:hover {
+  header :global(li:not(:last-child)) {
+    border-right: none;
+  }
+
+  header :global(li:hover) {
+    padding: 5px 10px;
+    margin: 0;
+  }
+
+  header :global(li a:hover) {
     text-decoration: none;
   }
 
-  strong a {
-    color: #000;
-    text-decoration: none;
-    margin: 10px;
-    line-height: 1.4;
+  header :global(strong) {
+    padding: 0 10px;
   }
 </style>
