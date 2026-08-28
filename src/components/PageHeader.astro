@@ -6,6 +6,12 @@ interface Props {
 const { isHome = false } = Astro.props;
 ---
 
+<div class="marquee-container">
+  <div class="marquee-text">
+    S1MPOSIO ECLÉCTICO. UN SIMPOSIO ES UN COMPENDIO DE ESPECIALISTAS EN EL QUE SE EXPONE Y DESARROLLA UN TEMA DE FORMA COMPLETA Y DETALLADA
+  </div>
+</div>
+
 <header>
   <nav>
     <strong>
@@ -25,6 +31,32 @@ const { isHome = false } = Astro.props;
 </header>
 
 <style>
+  .marquee-container {
+    width: 100%;
+    background-color: #fff;
+    border-bottom: 1px solid #000;
+    overflow: hidden;
+    padding: 8px 0;
+    font-size: 12px;
+    line-height: 1.4;
+  }
+
+  .marquee-text {
+    display: inline-block;
+    padding-left: 100%;
+    animation: marquee 30s linear infinite;
+    white-space: nowrap;
+  }
+
+  @keyframes marquee {
+    0% {
+      transform: translateX(0);
+    }
+    100% {
+      transform: translateX(-100%);
+    }
+  }
+
   header {
     position: fixed;
     top: 0;
