@@ -1,0 +1,23 @@
+---
+import Layout from '../../layouts/Layout.astro';
+import PageHeaderTop from '../../components/PageHeaderTop.astro';
+import PageFooter from '../../components/PageFooter.astro';
+import UnicodeGradient from '../../components/UnicodeGradient.astro';
+---
+
+<Layout title="simposio+eclectico+experimentos+unicode">
+  <PageHeaderTop />
+  <main class="experimentos-main">
+    <UnicodeGradient />
+  </main>
+  <PageFooter />
+</Layout>
+
+<style>
+  .experimentos-main {
+    margin: 0;
+    padding: 0;
+    height: calc(100vh - 80px);
+    overflow: hidden;
+  }
+</style>

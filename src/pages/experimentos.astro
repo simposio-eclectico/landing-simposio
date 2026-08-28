@@ -2,22 +2,73 @@
 import Layout from '../layouts/Layout.astro';
 import PageHeaderTop from '../components/PageHeaderTop.astro';
 import PageFooter from '../components/PageFooter.astro';
-import HatchingTesselation from '../components/HatchingTesselation.astro';
 ---
 
 <Layout title="simposio+eclectico+experimentos">
   <PageHeaderTop />
-  <main class="experimentos-main">
-    <HatchingTesselation />
+  <main>
+    <div class="experimentos-container">
+      <h1>experimentos</h1>
+      <div class="experimentos-grid">
+        <a href="/experimentos/hatching/" class="experimento-card">
+          <h2>Teselación de Tramados</h2>
+          <p>Patrones de tramado interactivos que responden al movimiento del mouse. Anima, aleatoriza o explora los cambios de densidad y rotación.</p>
+        </a>
+        <a href="/experimentos/unicode/" class="experimento-card">
+          <h2>Gradiente Unicode</h2>
+          <p>Visualización de gradientes usando caracteres Unicode. Genera ondas, ruido y animaciones con caracteres de sombra.</p>
+        </a>
+      </div>
+    </div>
   </main>
   <PageFooter />
 </Layout>
 
 <style>
-  .experimentos-main {
+  main {
+    padding: 20px;
+  }
+
+  .experimentos-container {
+    max-width: 1000px;
+    margin: 0 auto;
+  }
+
+  h1 {
+    font-size: 2rem;
+    margin-bottom: 40px;
+    border-bottom: 1px solid #000;
+    padding-bottom: 10px;
+  }
+
+  .experimentos-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(400px, 1fr));
+    gap: 20px;
+  }
+
+  .experimento-card {
+    display: block;
+    padding: 20px;
+    border: 1px solid #000;
+    text-decoration: none;
+    transition: all 0.2s;
+  }
+
+  .experimento-card:hover {
+    background-color: #f5f5f5;
+    transform: translateY(-2px);
+  }
+
+  .experimento-card h2 {
+    margin: 0 0 10px 0;
+    font-size: 1.3rem;
+  }
+
+  .experimento-card p {
     margin: 0;
-    padding: 0;
-    height: calc(100vh - 80px);
-    overflow: hidden;
+    color: #666;
+    font-size: 0.95rem;
+    line-height: 1.5;
   }
 </style>

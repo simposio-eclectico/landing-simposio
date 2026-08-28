@@ -1,0 +1,23 @@
+---
+import Layout from '../../layouts/Layout.astro';
+import PageHeaderTop from '../../components/PageHeaderTop.astro';
+import PageFooter from '../../components/PageFooter.astro';
+import HatchingTesselation from '../../components/HatchingTesselation.astro';
+---
+
+<Layout title="simposio+eclectico+experimentos+hatching">
+  <PageHeaderTop />
+  <main class="experimentos-main">
+    <HatchingTesselation />
+  </main>
+  <PageFooter />
+</Layout>
+
+<style>
+  .experimentos-main {
+    margin: 0;
+    padding: 0;
+    height: calc(100vh - 80px);
+    overflow: hidden;
+  }
+</style>
