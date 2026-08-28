@@ -3,9 +3,21 @@ import Layout from '../layouts/Layout.astro';
 import PageHeaderTop from '../components/PageHeaderTop.astro';
 import PageFooter from '../components/PageFooter.astro';
 import { getCollection } from 'astro:content';
+import { getExcerpt } from '../utils/excerpt';
 
-const escritos = (await getCollection('escritos')).sort(
-  (a, b) => new Date(b.data.pubDate).getTime() - new Date(a.data.pubDate).getTime()
+const EscritosData = await getCollection('escritos');
+
+// Get excerpt for each escrito
+const escritos = await Promise.all(
+  EscritosData.map(async (escrito) => {
+    const { body } = await escrito.render();
+    const excerpt = escrito.data.summary || getExcerpt(escrito.body, 25);
+    return { ...escrito, excerpt };
+  })
+).then((escritos) =>
+  escritos.sort(
+    (a, b) => new Date(b.data.pubDate).getTime() - new Date(a.data.pubDate).getTime()
+  )
 );
 ---
 
@@ -23,9 +35,7 @@ const escritos = (await getCollection('escritos')).sort(
             <li class="escrito-item">
               <a href={`/escritos/${escrito.slug}/`}>
                 <h2>{escrito.data.title}</h2>
-                {escrito.data.description && (
-                  <p class="description">{escrito.data.description}</p>
-                )}
+                <p class="excerpt">{escrito.excerpt}</p>
                 <p class="date">
                   {new Date(escrito.data.pubDate).toLocaleDateString('es-ES', {
                     year: 'numeric',
@@ -86,10 +96,11 @@ const escritos = (await getCollection('escritos')).sort(
     margin: 0 0 10px 0;
   }
 
-  .description {
+  .excerpt {
     margin: 10px 0;
     color: #666;
     font-size: 0.95rem;
+    line-height: 1.5;
   }
 
   .date {

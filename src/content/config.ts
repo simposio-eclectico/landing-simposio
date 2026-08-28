@@ -5,6 +5,7 @@ const escritosCollection = defineCollection({
   schema: z.object({
     title: z.string(),
     description: z.string().optional(),
+    summary: z.string().optional(),
     pubDate: z.date(),
     updatedDate: z.date().optional(),
     author: z.string().default('S1MPOSIO ECLÉCTICO'),

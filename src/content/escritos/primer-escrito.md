@@ -1,7 +1,7 @@
 ---
 title: Primer escrito
-description: Bienvenido a la sección de escritos
-pubDate: 2026-08-27
+summary: Bienvenido a la sección de escritos, donde compartimos reflexiones sobre arte, creatividad y experimentos sonoros.
+pubDate: 2026-08-28
 author: S1MPOSIO ECLÉCTICO
 ---
 
