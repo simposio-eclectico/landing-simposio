@@ -6,13 +6,7 @@ interface Props {
 const { isHome = false } = Astro.props;
 ---
 
-<div class="marquee-container">
-  <div class="marquee-text">
-    S1MPOSIO ECLÉCTICO. UN SIMPOSIO ES UN COMPENDIO DE ESPECIALISTAS EN EL QUE SE EXPONE Y DESARROLLA UN TEMA DE FORMA COMPLETA Y DETALLADA
-  </div>
-</div>
-
-<header>
+<footer class="page-footer">
   <nav>
     <strong>
       {isHome ? (
@@ -28,61 +22,37 @@ const { isHome = false } = Astro.props;
       <li><a href="/acerca/">acerca</a></li>
     </ul>
   </nav>
-</header>
+</footer>
 
 <style>
-  .marquee-container {
-    width: 100%;
-    background-color: #fff;
-    border-bottom: 1px solid #000;
-    overflow: hidden;
-    padding: 8px 0;
-    font-size: 12px;
-    line-height: 1.4;
-  }
-
-  .marquee-text {
-    display: inline-block;
-    padding-left: 100%;
-    animation: marquee 30s linear infinite;
-    white-space: nowrap;
-  }
-
-  @keyframes marquee {
-    0% {
-      transform: translateX(0);
-    }
-    100% {
-      transform: translateX(-100%);
-    }
-  }
-
-  header {
+  .page-footer {
     position: fixed;
-    top: 0;
+    bottom: 0;
     left: 0;
-    background-color: #fff;
-    border-bottom: 1px solid #000;
     width: 100%;
-    height: 50px;
+    height: 25px;
+    background-color: #fff;
+    border-top: 1px solid #000;
+    overflow: hidden;
+    z-index: 100;
   }
 
   nav {
-    display: flex;
-    flex-direction: row;
-    align-items: flex-end;
-    height: 100%;
     width: 100%;
+    height: 100%;
+    display: flex;
+    align-items: center;
   }
 
   strong {
     padding: 0 10px;
+    font-size: 12px;
   }
 
   strong a {
     color: #000;
     text-decoration: none;
-    line-height: 1.4;
+    line-height: 1;
   }
 
   ul {
@@ -93,16 +63,21 @@ const { isHome = false } = Astro.props;
     margin: 0;
     padding: 0;
     flex: 1;
+    height: 100%;
   }
 
   li {
     list-style-type: none;
-    margin: 5px 10px;
+    margin: 0;
     padding: 0;
+    display: flex;
+    align-items: center;
+    font-size: 12px;
   }
 
   li a {
     color: #000;
+    padding: 0 10px;
   }
 
   li a:hover {

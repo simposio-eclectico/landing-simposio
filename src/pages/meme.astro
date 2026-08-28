@@ -1,11 +1,12 @@
 ---
 import Layout from '../layouts/Layout.astro';
-import PageHeader from '../components/PageHeader.astro';
+import PageHeaderTop from '../components/PageHeaderTop.astro';
+import PageFooter from '../components/PageFooter.astro';
 import '../styles/meme.css';
 ---
 
 <Layout title="simposio+eclectico+meme">
-  <PageHeader />
+  <PageHeaderTop />
   <main>
     <ul>
       <li><img src="/img/meme/01.png" alt="meme 1" /></li>
@@ -20,4 +21,5 @@ import '../styles/meme.css';
       <li><img src="/img/meme/10.png" alt="meme 10" /></li>
     </ul>
   </main>
+  <PageFooter />
 </Layout>

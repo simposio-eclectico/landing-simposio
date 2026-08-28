@@ -1,12 +1,12 @@
 ---
 import Layout from '../layouts/Layout.astro';
 import AnimatedLogo from '../components/AnimatedLogo.astro';
-import Navigation from '../components/Navigation.astro';
+import PageHeaderTop from '../components/PageHeaderTop.astro';
+import PageFooter from '../components/PageFooter.astro';
 ---
 
 <Layout title="simposio+eclectico">
+  <PageHeaderTop />
   <AnimatedLogo />
-  <main>
-    <Navigation isHome={true} />
-  </main>
+  <PageFooter isHome={true} />
 </Layout>
