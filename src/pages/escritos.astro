@@ -1,0 +1,100 @@
+---
+import Layout from '../layouts/Layout.astro';
+import PageHeaderTop from '../components/PageHeaderTop.astro';
+import PageFooter from '../components/PageFooter.astro';
+import { getCollection } from 'astro:content';
+
+const escritos = (await getCollection('escritos')).sort(
+  (a, b) => new Date(b.data.pubDate).getTime() - new Date(a.data.pubDate).getTime()
+);
+---
+
+<Layout title="simposio+eclectico+escritos">
+  <PageHeaderTop />
+  <main>
+    <div class="escritos-container">
+      <h1>escritos</h1>
+
+      {escritos.length === 0 ? (
+        <p>No hay escritos aún. Pronto habrá contenido.</p>
+      ) : (
+        <ul class="escritos-list">
+          {escritos.map((escrito) => (
+            <li class="escrito-item">
+              <a href={`/escritos/${escrito.slug}/`}>
+                <h2>{escrito.data.title}</h2>
+                {escrito.data.description && (
+                  <p class="description">{escrito.data.description}</p>
+                )}
+                <p class="date">
+                  {new Date(escrito.data.pubDate).toLocaleDateString('es-ES', {
+                    year: 'numeric',
+                    month: 'long',
+                    day: 'numeric',
+                  })}
+                </p>
+              </a>
+            </li>
+          ))}
+        </ul>
+      )}
+    </div>
+  </main>
+  <PageFooter />
+</Layout>
+
+<style>
+  main {
+    padding: 20px;
+    max-width: 800px;
+    margin: 0 auto;
+  }
+
+  h1 {
+    font-size: 2rem;
+    margin-bottom: 30px;
+    border-bottom: 1px solid #000;
+    padding-bottom: 10px;
+  }
+
+  .escritos-list {
+    list-style: none;
+    padding: 0;
+  }
+
+  .escrito-item {
+    margin-bottom: 30px;
+    padding-bottom: 20px;
+    border-bottom: 1px solid #000;
+  }
+
+  .escrito-item:last-child {
+    border-bottom: none;
+  }
+
+  .escrito-item a {
+    text-decoration: none;
+    display: block;
+  }
+
+  .escrito-item a:hover h2 {
+    text-decoration: underline;
+  }
+
+  h2 {
+    font-size: 1.5rem;
+    margin: 0 0 10px 0;
+  }
+
+  .description {
+    margin: 10px 0;
+    color: #666;
+    font-size: 0.95rem;
+  }
+
+  .date {
+    margin: 10px 0 0 0;
+    font-size: 0.85rem;
+    color: #999;
+  }
+</style>
