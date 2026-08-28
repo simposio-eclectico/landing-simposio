@@ -37,6 +37,9 @@ import PageHeaderTop from '../components/PageHeaderTop.astro';
 
   ul {
     border-top: 1px solid #000;
+    list-style: none;
+    padding: 0;
+    margin: 0;
   }
 
   li {
@@ -56,5 +59,49 @@ import PageHeaderTop from '../components/PageHeaderTop.astro';
 
   li a {
     color: #000;
+  }
+
+  @media screen and (min-width: 600px) {
+    nav {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      min-height: 300px;
+    }
+
+    strong {
+      margin-bottom: 20px;
+      font-size: 1.2rem;
+    }
+
+    ul {
+      display: flex;
+      flex-direction: row;
+      gap: 40px;
+      border: none;
+      justify-content: center;
+    }
+
+    li {
+      padding: 0;
+      list-style: none;
+      text-align: center;
+      border: none;
+    }
+
+    li:not(:last-child) {
+      border: none;
+    }
+
+    li:hover {
+      padding: 0;
+      margin: 0;
+      text-decoration: underline;
+    }
+
+    li a {
+      color: #000;
+    }
   }
 </style>
