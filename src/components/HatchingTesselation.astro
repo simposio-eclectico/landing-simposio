@@ -1,0 +1,218 @@
+---
+// Interactive hatching pattern tesselation experiment
+---
+
+<div class="hatching-tesselation-container">
+  <canvas id="hatchingCanvas"></canvas>
+  <div class="controls">
+    <button id="animateBtn">Animar</button>
+    <button id="randomBtn">Aleatorio</button>
+    <button id="resetBtn">Reiniciar</button>
+  </div>
+</div>
+
+<script>
+  const canvas = document.getElementById('hatchingCanvas');
+  const ctx = canvas.getContext('2d');
+
+  canvas.width = window.innerWidth;
+  canvas.height = window.innerHeight - 80 - 40; // Account for header and footer
+
+  const GRID_SIZE = 40;
+  let animating = false;
+  let animationTime = 0;
+
+  interface Cell {
+    x: number;
+    y: number;
+    angle: number;
+    targetAngle: number;
+    density: number;
+    targetDensity: number;
+  }
+
+  let grid: Cell[] = [];
+  let targetGrid: Cell[] = [];
+
+  function initializeGrid() {
+    grid = [];
+    for (let y = 0; y < canvas.height; y += GRID_SIZE) {
+      for (let x = 0; x < canvas.width; x += GRID_SIZE) {
+        grid.push({
+          x,
+          y,
+          angle: 0,
+          targetAngle: 0,
+          density: 0.5,
+          targetDensity: 0.5,
+        });
+      }
+    }
+  }
+
+  function drawHatchCell(cell: Cell) {
+    ctx.save();
+    ctx.translate(cell.x + GRID_SIZE / 2, cell.y + GRID_SIZE / 2);
+    ctx.rotate(cell.angle);
+    ctx.translate(-(GRID_SIZE / 2), -(GRID_SIZE / 2));
+
+    const spacing = Math.max(2, GRID_SIZE * (1 - cell.density));
+    for (let i = 0; i < GRID_SIZE; i += spacing) {
+      ctx.beginPath();
+      ctx.moveTo(i, 0);
+      ctx.lineTo(i, GRID_SIZE);
+      ctx.strokeStyle = '#000';
+      ctx.lineWidth = 1;
+      ctx.stroke();
+    }
+
+    ctx.restore();
+  }
+
+  function draw() {
+    ctx.fillStyle = '#fff';
+    ctx.fillRect(0, 0, canvas.width, canvas.height);
+    ctx.strokeStyle = '#000';
+    ctx.lineWidth = 0.5;
+
+    // Draw grid borders
+    for (let y = 0; y < canvas.height; y += GRID_SIZE) {
+      ctx.beginPath();
+      ctx.moveTo(0, y);
+      ctx.lineTo(canvas.width, y);
+      ctx.stroke();
+    }
+    for (let x = 0; x < canvas.width; x += GRID_SIZE) {
+      ctx.beginPath();
+      ctx.moveTo(x, 0);
+      ctx.lineTo(x, canvas.height);
+      ctx.stroke();
+    }
+
+    // Draw hatching cells
+    grid.forEach((cell) => {
+      if (animating) {
+        cell.angle += (cell.targetAngle - cell.angle) * 0.05;
+        cell.density += (cell.targetDensity - cell.density) * 0.05;
+      }
+      drawHatchCell(cell);
+    });
+
+    if (animating) {
+      animationTime++;
+      if (animationTime > 120) {
+        animating = false;
+      }
+      requestAnimationFrame(draw);
+    }
+  }
+
+  function startRandomAnimation() {
+    animating = true;
+    animationTime = 0;
+
+    grid.forEach((cell) => {
+      cell.targetAngle = Math.random() * Math.PI;
+      cell.targetDensity = Math.random();
+    });
+
+    draw();
+  }
+
+  function reset() {
+    animating = false;
+    grid.forEach((cell) => {
+      cell.angle = 0;
+      cell.targetAngle = 0;
+      cell.density = 0.5;
+      cell.targetDensity = 0.5;
+    });
+    draw();
+  }
+
+  // Event listeners
+  document.getElementById('animateBtn')?.addEventListener('click', startRandomAnimation);
+  document.getElementById('randomBtn')?.addEventListener('click', () => {
+    grid.forEach((cell) => {
+      cell.angle = Math.random() * Math.PI;
+      cell.density = Math.random();
+    });
+    draw();
+  });
+  document.getElementById('resetBtn')?.addEventListener('click', reset);
+
+  // Mouse interaction
+  canvas.addEventListener('mousemove', (e) => {
+    const rect = canvas.getBoundingClientRect();
+    const mouseX = e.clientX - rect.left;
+    const mouseY = e.clientY - rect.top;
+
+    grid.forEach((cell) => {
+      const dx = mouseX - (cell.x + GRID_SIZE / 2);
+      const dy = mouseY - (cell.y + GRID_SIZE / 2);
+      const distance = Math.sqrt(dx * dx + dy * dy);
+      const maxDistance = 200;
+
+      if (distance < maxDistance) {
+        const angle = Math.atan2(dy, dx);
+        cell.targetAngle = angle;
+        cell.targetDensity = 1 - distance / maxDistance;
+      }
+    });
+  });
+
+  // Window resize
+  window.addEventListener('resize', () => {
+    canvas.width = window.innerWidth;
+    canvas.height = window.innerHeight - 80 - 40;
+    initializeGrid();
+    draw();
+  });
+
+  // Initialize
+  initializeGrid();
+  draw();
+</script>
+
+<style>
+  .hatching-tesselation-container {
+    width: 100%;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+  }
+
+  #hatchingCanvas {
+    flex: 1;
+    display: block;
+    cursor: crosshair;
+  }
+
+  .controls {
+    display: flex;
+    gap: 10px;
+    padding: 20px;
+    background-color: #fff;
+    border-top: 1px solid #000;
+    justify-content: center;
+  }
+
+  button {
+    padding: 10px 20px;
+    background-color: #fff;
+    border: 1px solid #000;
+    cursor: pointer;
+    font-family: 'Fira Code', monospace;
+    font-size: 1rem;
+    transition: all 0.2s;
+  }
+
+  button:hover {
+    background-color: #000;
+    color: #fff;
+  }
+
+  button:active {
+    transform: scale(0.95);
+  }
+</style>
